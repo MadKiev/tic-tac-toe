@@ -17,22 +17,24 @@ window.onload = function() {
         } else {
             if (count % 2 === 0)
                 symbol = '0';
-            else
-                symbol = 'x';
-
-
+             // else
+             //     symbol = 'x';
+            makeRandomStep();
+            checkWin();
+            checkDraw();
             e.target.innerHTML = symbol;
             e.target.className = 'block';
-            count++;
+            // count++;
             if (count > 4)
                 checkWin(symbol);
+            return false;
 
 
         }
     }
 
     function checkWin(s) {
-        makeRandomStep();
+
         checkDraw(s);
 
         console.log(s);
@@ -70,7 +72,7 @@ window.onload = function() {
 
     function makeRandomStep() {
 
-        var cells = document.getElementById("game").getElementsByTagName("block");
+        var cells = document.getElementById('game').getElementsByClassName('block');
         var emptyCells = [];
         for (var i = 0; i < cells.length; i++) {
             if (cells[i].innerText === "") {
@@ -80,6 +82,21 @@ window.onload = function() {
 
         }
         random = Math.floor(Math.random() * (emptyCells.length));
-        cells[emptyCells[random]].innerHTML = "s";
+        cells[emptyCells[random]].innerHTML = "x";
     }
 }
+/*
+function move(id, role) {
+    if(t[id]) return false;
+    t[id]=role;
+    document.getElementById(id).className = 'cell ' + role;
+    !checkWin() ? (role=='player') ? ai() : null :reset();
+    }
+
+
+function ai() {
+    //0
+    var id = Math.floor(Math.random()*9);
+    t[id] ? ai():move(id,'ai');
+}
+ */
